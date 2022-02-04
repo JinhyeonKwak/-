@@ -2,25 +2,16 @@
 
 n, m = map(int, input().split())
 coins = [int(input()) for _ in range(n)]
-coins.sort(reverse=True)
+coins.sort()
 
-# result = 0
-# for i in range(len(coins)):
-#     if coins[i] <= m:
-#         k = m // coins[i]
-#         m -= k * coins[i]
-#         result += k
-#         if m == 0:
-#             break
-#         if i < len(coins) - 1:
-#             if m < coins[i+1]:
-#                 m += coins[i]
-#                 result -= 1
-#
-# if m == 0:
-#     print(result)
-# else:
-#     print(-1)
+d = [10001] * (m+1)
+d[0] = 0
+for x in coins:
+    for i in range(x, m+1):
+        d[i] = min(d[i], d[i-x]+1)
 
-
-
+result = d[m]
+if result == 10001:
+    print(-1)
+else:
+    print(result)
