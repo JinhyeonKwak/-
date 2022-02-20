@@ -1,16 +1,18 @@
+# 전보
 import heapq
 import sys
+
 input = sys.stdin.readline
 INF = int(1e9)
 
-n, m = map(int, input().split())
-start = int(input())
+n, m, c = map(int, input().split())
 graph = [[] for _ in range(n+1)]
 distance = [INF] * (n+1)
 
 for _ in range(m):
-    a, b, c = map(int, input().split())
-    graph[a].append((b, c))
+    x, y, z = map(int, input().split())
+    graph[x].append((y, z))
+
 
 def dijkstra(start):
     q = []
@@ -26,14 +28,16 @@ def dijkstra(start):
                 distance[i[0]] = cost
                 heapq.heappush(q, (cost, i[0]))
 
-dijkstra(start)
 
-for i in range(1, n+1):
-    if distance[i] == INF:
-        print("INFINITY")
-    else:
-        print(distance[i])
+dijkstra(c)
 
+tmp = []
+for x in distance:
+    if x != INF and x != 0:
+        tmp.append(x)
 
+transmit_cnt = len(tmp)
+transmit_time = max(tmp)
 
+print(transmit_cnt, transmit_time)
 
