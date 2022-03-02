@@ -26,3 +26,5 @@ for a in range(1, n+1):
         else:
             print(graph[a][b], end=" ")
     print()
+
+
